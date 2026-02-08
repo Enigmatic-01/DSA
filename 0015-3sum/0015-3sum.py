@@ -1,18 +1,32 @@
 class Solution(object):
     def threeSum(self, nums):
-        d_set = set()
         ans = []
         n = len(nums)
+        nums.sort()
         for i in range(n-2):
-            j =i+1
-            k = j+1
-            while(k<n):
-                if(nums[i]+nums[j]+nums[k]==0):
-                    r = [nums[i],nums[j],nums[k]]
-                    d_set.add(tuple(sorted(r)))
-                    
+            if i>0 and nums[i]==nums[i-1]:
                 
-                j+=1
-                k+=1
-        ans = [list(x) for x in d_set]
-        return ans
+                continue
+            
+            j = i+1
+            k = n-1
+            while(j<k):
+                summation = nums[i]+nums[j]+nums[k]
+                if(summation==0):
+                    ans.append([nums[i],nums[j],nums[k]])
+                    j+=1
+                    while(k>j and nums[j]==nums[j-1] ):
+                        j+=1
+                    k-=1
+                    while(k<n and k>j and nums[k]==nums[k+1] ):
+                        k-=1
+                elif(summation>0):
+                    k-=1
+                    while(k<n and k>j and nums[k]==nums[k+1] ):
+                        k-=1
+                else:
+                    j+=1
+                    while(k>j  and  nums[j]==nums[j-1] ):
+                        j+=1
+        return ans       
+                
