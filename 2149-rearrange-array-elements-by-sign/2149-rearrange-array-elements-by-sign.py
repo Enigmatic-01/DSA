@@ -4,25 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        pos= []
-        neg = []
+        res= [0]*len(nums)
+        pos = 0
+        neg = 1
+
         for n in nums:
-            if(n<0):
-                neg.append(n)
+            if(n>0):
+                res[pos] = n
+                pos+=2
             else:
-                pos.append(n)
+                res[neg]=n
+                neg+= 2
                 
-        n = len(pos)
-        m = len(neg)
 
-        i = 0
-        j = 0
-
-        for k in range(len(nums)):
-            if(k%2==0):
-                nums[k]=pos[i]
-                i+=1
-            else:
-                nums[k]=neg[j]
-                j+=1
-        return nums
+        return res
