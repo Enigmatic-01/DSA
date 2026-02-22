@@ -1,17 +1,17 @@
 class Solution(object):
     def subarraySum(self, nums, k):
-        map = {}
+        map = {0:1}
+        n = len(nums)
         cnt = 0
         summation = 0
-        map[0]=1
-        for n in nums:
-            summation += n
+        for r in range(n):
+            summation+=nums[r]
             remain = summation-k
-            cnt+=map.get(remain,0)
-            if(summation in map):
-                map[summation]+=1
+            if remain in map:
+                 cnt+=map[remain]
+            if summation not in map :
+                map[summation] = 1
             else:
-                map[summation]=1
+                map[summation]+=1
         return cnt
-            
 
